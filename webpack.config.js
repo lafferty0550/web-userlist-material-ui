@@ -11,6 +11,7 @@ const _root = path.resolve();
 const _src = path.join(_root, '/src');
 
 const _front = path.join(_src, '/front');
+const _common = path.join(_src, '/common');
 const _back = path.join(_src, '/back');
 
 const _frontEntry = path.join(_front, '/launcher');
@@ -26,11 +27,13 @@ const aliases = {
     '@components': path.join(_front, '/components'),
     '@containers': path.join(_front, '/containers'),
     '@reducers': path.join(_front, '/reducers'),
-    '@api': path.join(_front, '/api')
+    '@api': path.join(_front, '/api'),
+    '@common': _common
 }
 
 const backAliases = {
-    '@back': _back
+    '@back': _back,
+    '@common': _common
 }
 
 rimraf(_output, () => console.log(`=========DELETED=========  ${_output}`));

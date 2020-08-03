@@ -21,6 +21,7 @@ export default (user: UserModel): ThunkType<ActionType> => async dispatch => {
         else
             dispatch(createAction(CREATE_SUCCESS, result.msg));
     } catch (err) {
-        dispatch(createAction(CREATE_FAILURE, err.toString()));
+        console.error(err.toString());
+        dispatch(createAction(CREATE_FAILURE, err.response.data.msg));
     }
 }

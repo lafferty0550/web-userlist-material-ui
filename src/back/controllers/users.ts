@@ -12,7 +12,7 @@ export const getUsers = async (req: Request, res: Response) => {
         console.error(err.toString());
         res.status(500).json({
             success: false,
-            msg: 'Error while getting'
+            msg: `Error while getting: ${err.toString()}`
         });
     }
 }
@@ -28,7 +28,7 @@ export const createUser = async (req: Request, res: Response) => {
         console.error(err.toString());
         res.status(500).json({
             success: false,
-            msg: 'Error while creating'
+            msg: `Error while creating: ${err.toString()}`
         });
     }
 }

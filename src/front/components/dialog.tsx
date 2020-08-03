@@ -1,9 +1,10 @@
 import React from 'react';
 import {
     Button, Dialog, DialogContent, CircularProgress,
-    DialogTitle, TextField, makeStyles, Snackbar
+    DialogTitle, TextField, makeStyles
 } from '@material-ui/core';
-import MuiAlert from '@material-ui/lab/Alert';
+
+import Validator from '@common/helpers/validator';
 
 const useStyles = makeStyles(() => ({save: {width: '100%'}}));
 
@@ -17,17 +18,12 @@ type PropsType = {
     open: boolean,
     userInfo: UserInfoType,
     pending: boolean,
-    success: boolean,
-    msg: string,
     onSave: () => void,
     handleClose: () => void,
     setUserInfo: (value: UserInfoType) => void
 };
 
-export default (({
-                     handleClose, onSave, open, userInfo, setUserInfo,
-                     success, pending, msg
-                 }) => {
+export default (({handleClose, onSave, open, userInfo, setUserInfo, pending}) => {
     const classes = useStyles();
 
     return (
@@ -37,6 +33,7 @@ export default (({
             <DialogContent>
                 <TextField
                     autoFocus
+                    error={!Validator.checkName(userInfo.name)}
                     margin="dense"
                     label="Имя"
                     variant="outlined"
@@ -44,6 +41,7 @@ export default (({
                     onChange={e => setUserInfo({...userInfo, name: e.target.value})}
                     fullWidth/>
                 <TextField
+                    error={!Validator.checkName(userInfo.surname)}
                     margin="dense"
                     label="Фамилия"
                     variant="outlined"
@@ -51,7 +49,7 @@ export default (({
                     onChange={e => setUserInfo({...userInfo, surname: e.target.value})}
                     fullWidth/>
                 <TextField
-                    error
+                    error={!Validator.checkEmail(userInfo.email)}
                     margin="dense"
                     label="Почта"
                     type="email"
@@ -71,12 +69,6 @@ export default (({
                     Создать
                 </Button>
             </DialogContent>
-            <Snackbar open={!success} autoHideDuration={6000}>
-                <MuiAlert elevation={6} variant="filled" severity='error'>{msg}</MuiAlert>
-            </Snackbar>
-            <Snackbar open={!success && msg !== ''} autoHideDuration={6000}>
-                <MuiAlert elevation={6} variant="filled" severity='success'>{msg}</MuiAlert>
-            </Snackbar>
         </Dialog>
     )
 }) as React.FC<PropsType>;

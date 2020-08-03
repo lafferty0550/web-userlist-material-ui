@@ -19,7 +19,8 @@
       "@components/*": ["front/components/*"],
       "@reducers": ["front/reducers"],
       "@reducers/*": ["front/reducers/*"],
-      "@containers/*": ["front/containers/*"]
+      "@containers/*": ["front/containers/*"],
+      "@common/*": ["common/*"]
     }
   }
 }

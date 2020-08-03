@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {Snackbar, Container, CircularProgress} from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 
@@ -16,13 +16,15 @@ type PropsType = {
 export default (({pending, success, msg, data}) => {
     const [open, setOpen] = useState(false);
 
+    const UserListMemo = useMemo(() => <UserList users={data} setOpen={setOpen}/>, [data]);
+
     return (
         <Container maxWidth={false}>
             <Snackbar open={!success} autoHideDuration={6000}>
                 <MuiAlert elevation={6} variant="filled" severity='error'>{msg}</MuiAlert>
             </Snackbar>
             {pending && <CircularProgress/>}
-            {!pending && success && <UserList users={data} setOpen={setOpen}/>}
+            {!pending && success && UserListMemo}
             <Dialog open={open} handleClose={() => setOpen(false)}/>
         </Container>
     );
