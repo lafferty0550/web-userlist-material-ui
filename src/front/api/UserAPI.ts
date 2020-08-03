@@ -5,7 +5,7 @@ export type UserModel = { email: string, name?: string, surname?: string };
 export default class {
     static request = axios.create({
         baseURL: (process.env.NODE_ENV === 'production')
-            ? 'https://sleepy-citadel-37860.herokuapp.com/api'
+            ? 'https://evening-waters-00743.herokuapp.com/api'
             : 'http://localhost:3000/api'
     });
 
