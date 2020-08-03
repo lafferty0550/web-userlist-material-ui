@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "outDir": "./build/",
+    "sourceMap": true,
+    "module": "esnext",
+    "allowJs": false,
+    "noImplicitAny": true,
+    "target": "es5",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "jsx": "react",
+    "skipLibCheck": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@back/*": ["back/*"],
+      "@api/*": ["front/api/*"],
+      "@actions/*": ["front/actions/*"],
+      "@components": ["front/components"],
+      "@components/*": ["front/components/*"],
+      "@reducers": ["front/reducers"],
+      "@reducers/*": ["front/reducers/*"],
+      "@containers/*": ["front/containers/*"]
+    }
+  }
+}
