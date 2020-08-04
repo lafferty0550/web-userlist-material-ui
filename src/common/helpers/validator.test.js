@@ -11,11 +11,11 @@ describe('Validator test', () => {
     });
 
     it('Name validation', () => {
-        expect(Validator.checkName('Thomas')).toEqual(true);
+        expect(Validator.checkName('Серега')).toEqual(true);
         expect(Validator.checkName('Ilya')).toEqual(true);
         expect(Validator.checkName('Lala')).toEqual(true);
         expect(Validator.checkName('L0p')).toEqual(false);
-        expect(Validator.checkName('Ilya')).toEqual(true);
+        expect(Validator.checkName('Илья')).toEqual(true);
         expect(Validator.checkName('Ilya1')).toEqual(false);
         expect(Validator.checkName('1Ilya')).toEqual(false);
         expect(Validator.checkName('Il.ya')).toEqual(false);
