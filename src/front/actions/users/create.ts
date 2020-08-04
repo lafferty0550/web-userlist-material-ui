@@ -9,7 +9,7 @@ type Type = typeof CREATE_PENDING | typeof CREATE_SUCCESS | typeof CREATE_FAILUR
 type ActionType = { type: Type, msg?: string };
 export {ActionType as CreateActionType};
 
-const createAction = (type: Type, msg?: string): ActionType => ({type, msg});
+export const createAction = (type: Type, msg?: string): ActionType => ({type, msg});
 
 export default (user: UserModel): ThunkType<ActionType> => async dispatch => {
     dispatch(createAction(CREATE_PENDING));

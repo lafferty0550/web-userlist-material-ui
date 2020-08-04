@@ -1,6 +1,11 @@
 import mongoose, {Schema, Document} from 'mongoose';
 
-import Validator from '@common/helpers/validator';
+import Validator from '../../common/helpers/validator';
+import {
+    EMAIL_VALIDATION_ERROR,
+    NAME_VALIDATION_ERROR,
+    SURNAME_VALIDATION_ERROR
+} from '../constants';
 
 export interface IUser extends Document {
     email: string,
@@ -14,15 +19,15 @@ const schema: Schema = new Schema({
         unique: true,
         required: 'Email address is required',
         lowercase: true,
-        validate: [Validator.checkEmail, 'please fill a valid email address']
+        validate: [Validator.checkEmail, EMAIL_VALIDATION_ERROR]
     },
     name: {
         type: String,
-        validate: [Validator.checkName, 'only letters in a name']
+        validate: [Validator.checkName, NAME_VALIDATION_ERROR]
     },
     surname:  {
         type: String,
-        validate: [Validator.checkName, 'only letters in a surname']
+        validate: [Validator.checkName, SURNAME_VALIDATION_ERROR]
     }
 });
 

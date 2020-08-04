@@ -9,7 +9,7 @@ type Type = typeof FETCH_PENDING | typeof FETCH_SUCCESS | typeof FETCH_FAILURE;
 type ActionType = { type: Type, data?: Array<UserModel>, msg?: string };
 export {ActionType as UsersActionType};
 
-const createAction = (type: Type, data?: Array<UserModel>, msg?: string): ActionType => ({type, data, msg});
+export const createAction = (type: Type, data?: Array<UserModel>, msg?: string): ActionType => ({type, data, msg});
 
 export default (): ThunkType<ActionType> => async dispatch => {
     dispatch(createAction(FETCH_PENDING));
@@ -20,6 +20,6 @@ export default (): ThunkType<ActionType> => async dispatch => {
         else
             dispatch(createAction(FETCH_SUCCESS, result.users))
     } catch (err) {
-        dispatch(createAction(FETCH_FAILURE, err.toString()));
+        dispatch(createAction(FETCH_FAILURE, undefined, err.response.data.msg));
     }
 }

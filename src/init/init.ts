@@ -1,5 +1,6 @@
 import Generator from './db-generator';
 import db from '@back/models';
+require('dotenv').config();
 
 (async () => {
     console.log('INITIALIZATING DATABASE BY DEFAULT VALUES...');

@@ -1,12 +1,19 @@
 import React from 'react';
 import {
-    Button, Dialog, DialogContent, CircularProgress,
+    Button, Dialog, DialogContent, LinearProgress,
     DialogTitle, TextField, makeStyles
 } from '@material-ui/core';
 
 import Validator from '@common/helpers/validator';
 
-const useStyles = makeStyles(() => ({save: {width: '100%'}}));
+const useStyles = makeStyles(() => ({
+    save: {
+        width: '100%'
+    },
+    content: {
+        marginTop: 40
+    }
+}));
 
 type UserInfoType = {
     email: string,
@@ -29,8 +36,8 @@ export default (({handleClose, onSave, open, userInfo, setUserInfo, pending}) =>
     return (
         <Dialog onClose={handleClose} open={open}>
             <DialogTitle>Создание пользователя</DialogTitle>
-            {pending && <CircularProgress/>}
-            <DialogContent>
+            {pending && <LinearProgress/>}
+            <DialogContent className={classes.content}>
                 <TextField
                     autoFocus
                     error={!Validator.checkName(userInfo.name)}
@@ -65,7 +72,8 @@ export default (({handleClose, onSave, open, userInfo, setUserInfo, pending}) =>
                     variant="contained"
                     color="primary"
                     className={classes.save}
-                    disabled={userInfo.email.trim() === ''}>
+                    disabled={(userInfo.email.trim() === '') || !Validator.checkEmail(userInfo.email)
+                    || !Validator.checkName(userInfo.surname) || !Validator.checkName(userInfo.name)}>
                     Создать
                 </Button>
             </DialogContent>
