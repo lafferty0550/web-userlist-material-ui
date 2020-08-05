@@ -1,12 +1,12 @@
 import React from 'react';
 import {
     Avatar, Button, Card,
-    CardHeader, Grid, makeStyles
+    CardHeader, Grid, makeStyles, Theme
 } from '@material-ui/core';
 
 import {UserModel} from '@api/UserAPI';
 
-const useStyles = makeStyles(() => {
+const useStyles = makeStyles((theme: Theme) => {
     const headerSize = 90;
     const cardWidth = 350;
     return {
@@ -14,29 +14,30 @@ const useStyles = makeStyles(() => {
             paddingTop: 50
         },
         button: {
-            borderStyle: 'dotted',
+            borderStyle: 'dashed',
             fontSize: 48,
             width: cardWidth,
             height: headerSize,
-            color: '#999'
+            color: theme.palette.secondary.main
         },
         card: {
             display: 'flex',
             height: headerSize,
             width: cardWidth,
-            border: '1px solid lightgray',
-            boxShadow: '1px 1px 3px lightgray'
+            boxShadow: '1px 1px 10px #ddd'
         },
         card__num: {
             height: headerSize,
             width: headerSize - 20,
             margin: 0,
-            backgroundColor: '#eee',
-            color: '#bbb',
-            fontSize: 24
+            backgroundColor: theme.palette.secondary.light,
+            color: theme.palette.secondary.main,
+            fontSize: 30,
+            fontWeight: 700
         },
         card__avatar: {
-            backgroundColor: '#1EC9E8'
+            backgroundColor: theme.palette.primary.main,
+            fontSize: 16
         }
     };
 });
@@ -64,7 +65,8 @@ export default (({users, setOpen}) => {
                                 </Avatar>
                             }
                             title={`${user.name} ${user.surname}`}
-                            subheader={user.email}/>
+                            subheader={user.email}
+                            subheaderTypographyProps={{variant: 'caption'}}/>
                     </Card>
                 </Grid>
             ))}

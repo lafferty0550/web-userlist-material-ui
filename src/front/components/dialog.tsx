@@ -1,17 +1,28 @@
 import React from 'react';
 import {
     Button, Dialog, DialogContent, LinearProgress,
-    DialogTitle, TextField, makeStyles
+    DialogTitle, TextField, makeStyles, DialogActions
 } from '@material-ui/core';
 
 import Validator from '@common/helpers/validator';
 
 const useStyles = makeStyles(() => ({
     save: {
-        width: '100%'
+        width: '100%',
+        color: '#fff',
+        fontSize: 12,
+        padding: 10,
+        textTransform: 'capitalize'
     },
-    content: {
-        marginTop: 40
+    dialog: {
+        maxWidth: 500,
+        margin: '0 auto'
+    },
+    dialog__actions: {
+        padding: 20
+    },
+    dialog__field: {
+        marginTop: 20
     }
 }));
 
@@ -34,10 +45,10 @@ export default (({handleClose, onSave, open, userInfo, setUserInfo, pending}) =>
     const classes = useStyles();
 
     return (
-        <Dialog onClose={handleClose} open={open}>
+        <Dialog className={classes.dialog} onClose={handleClose} open={open}>
             <DialogTitle>Создание пользователя</DialogTitle>
             {pending && <LinearProgress/>}
-            <DialogContent className={classes.content}>
+            <DialogContent>
                 <TextField
                     autoFocus
                     error={!Validator.checkName(userInfo.name)}
@@ -46,6 +57,7 @@ export default (({handleClose, onSave, open, userInfo, setUserInfo, pending}) =>
                     variant="outlined"
                     value={userInfo.name}
                     onChange={e => setUserInfo({...userInfo, name: e.target.value})}
+                    className={classes.dialog__field}
                     fullWidth/>
                 <TextField
                     error={!Validator.checkName(userInfo.surname)}
@@ -54,19 +66,21 @@ export default (({handleClose, onSave, open, userInfo, setUserInfo, pending}) =>
                     variant="outlined"
                     value={userInfo.surname}
                     onChange={e => setUserInfo({...userInfo, surname: e.target.value})}
+                    className={classes.dialog__field}
                     fullWidth/>
                 <TextField
                     error={!Validator.checkEmail(userInfo.email)}
                     margin="dense"
                     label="Почта"
                     type="email"
-                    helperText="Обязательное поле"
+                    helperText="Необходимо заполнить"
                     variant="outlined"
                     value={userInfo.email}
                     onChange={e => setUserInfo({...userInfo, email: e.target.value})}
+                    className={classes.dialog__field}
                     fullWidth/>
             </DialogContent>
-            <DialogContent>
+            <DialogActions className={classes.dialog__actions}>
                 <Button
                     onClick={onSave}
                     variant="contained"
@@ -76,7 +90,7 @@ export default (({handleClose, onSave, open, userInfo, setUserInfo, pending}) =>
                     || !Validator.checkName(userInfo.surname) || !Validator.checkName(userInfo.name)}>
                     Создать
                 </Button>
-            </DialogContent>
+            </DialogActions>
         </Dialog>
     )
 }) as React.FC<PropsType>;
